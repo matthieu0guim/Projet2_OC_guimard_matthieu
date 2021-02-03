@@ -26,4 +26,11 @@ while n < len(liens):
     n += 1
     dico_livres['livre ' + str(n)] = lien(urls, n)
 
-    print(dico_livres)
+    # print(dico_livres)
+i = 0
+
+
+for k,l in dico_livres.items():
+    if int(k[-1]) > 2 :
+        break
+    else:

@@ -52,9 +52,3 @@ with open('page_produit.csv', 'w', encoding='utf8') as outf:
                 + ',' + review_rating + ',' + image_url)
 
 
-#
-# print('titre:', '\n', title.text.split()[0])
-# print("product_description:", '\n', str(product_description))
-# print("review_rating :", '\n', review)
-# [print(str(nom.text), ':', '\n', str(info.text) + '\n\n') for nom, info in zip(noms, infos)]
-# print("image_url :", '\n', image_url)

@@ -17,7 +17,7 @@ review_rating = item[2].get('class')[1]
 photo = page.find('div', {'class': 'item active'})
 image_url = photo.img.get("src")
 infos = page.find('table', {'class' : 'table table-striped'})
-
+print(infos)
 """
    Dans cette boucle for j'ai préalablement affiché la valeur de i pour chaque valeur de n.
    Lorsque cette valeur correspondait à l'info que je cherchais j'ai attribué la valeur à la variable correspondante.

@@ -9,14 +9,16 @@ book_number = page.find('form', {'class': 'form-horizontal'}).find(
 balises = page.find('section').findAll('h3')
 liens = []
 urls = []
-
+TITRE_LIVRE = 0
+INDEX_PAGE = 1
 for i in balises:
     liens.append(i.find('a').get('href').split('/')[-2:])
 
 for i in liens:
-    urls.append("http://books.toscrape.com/catalogue/" + i[0] + "/" + i[1])
+    urls.append(f"http://books.toscrape.com/catalogue/{i[TITRE_LIVRE]}/{i[INDEX_PAGE]}")
+print(urls)
 
-"""cette fonction renvoie simplement l'élément dune lioste correspondant à l'indice demandé. La seul particularité est"""
+"""cette fonction renvoie simplement l'élément dune liste correspondant à l'indice demandé. La seul particularité est"""
 
 
 def lien(liste, i):
@@ -36,10 +38,10 @@ i = 0
 with open('page_produit.csv', 'w', encoding='utf8') as outf:
     outf.write('product_page_url, universal_product_code, title, price_including_taxes, price_excluding_taxes, '
                'number_available, product_description, category, review_rating, image_url\n')
-for k, l in dico_livres.items():
+for k, v in dico_livres.items():
 
     product_description = ""
-    product_page_url = l  # on donne l'url à une variable
+    product_page_url = v  # on donne l'url à une variable
     r = requests.get(product_page_url)  # méthode de requests qui tire de l'information depuis l'url
     page = BeautifulSoup(r.text, 'html.parser')  # on extrait le texte qu'il y a dans la variable r
     title = page.find('div', {'class': 'col-sm-6 product_main'}).find('h1')

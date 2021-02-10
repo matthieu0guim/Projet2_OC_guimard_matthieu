@@ -7,7 +7,6 @@ maintenance = {'columns': 'product_page_url; universale_product_code; title; pri
     , 'csv separator': ';'}
 
 home_url = "http://books.toscrape.com/catalogue/category/books/mystery_3/page-1.html"
-#home_url = "http://books.toscrape.com/catalogue/category/books/poetry_23/index.html"
 response = requests.get(home_url)
 html_info = BeautifulSoup(response.text, 'html.parser')
 
@@ -64,8 +63,8 @@ def initialisation():
             else:
                 outf.write(header + maintenance['csv separator'])
         outf.write('\n')
-def listing(u, dico, inventory, n):
-    dic = {}
+def listing(u, inventory):
+
     welcome_url = f"{u}"
     response = requests.get(welcome_url)
     html = BeautifulSoup(response.text, 'html.parser')
@@ -104,7 +103,7 @@ if html_info.find('li', {'class': 'current'}):
     number_of_pages = [f"http://books.toscrape.com/catalogue/category/books/mystery_3/page-{i}.html"
                        for i in range(1,int(html_info.find('li', {'class': 'current'}).text.strip()[-1])+1)]
     for i, url in enumerate(number_of_pages):
-        link_dictionary = listing(url, dico_livres, urls, n)
+        link_dictionary = listing(url, urls)
 
     initialisation()
     for k, v in link_dictionary.items():

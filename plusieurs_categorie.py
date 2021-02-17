@@ -120,15 +120,16 @@ if __name__ == "__main__":
             for url in number_of_pages:
                 link_dictionary = listing(url, urls)
 
+            print("if ok")
+
             for k, v in link_dictionary.items():
                 product_inspection = find_book_data(v)
-                # print(files_list[i])
+
 
                 write_data(product_inspection, files_list[nb])
-            print("if ok")
+
         else:
             number_of_pages = [home_cat_url]
-            # print(home_cat_url)
             for url in number_of_pages:
 
                 link_dictionary = listing(url, urls)

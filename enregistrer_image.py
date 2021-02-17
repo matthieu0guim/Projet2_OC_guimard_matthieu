@@ -10,5 +10,14 @@ soup = BeautifulSoup(response.text, 'html.parser')
 
 image_url = f"http://books.toscrape.com/{soup.find('div', {'class': 'item active'}).img.get('src')[5:]}"
 print(image_url)
-os.mkdir('mon_dossier')
+dossier = "mon_dossier"
+
+try:
+    os.mkdir(dossier)
+except:
+    pass
+
 urllib.request.urlretrieve(image_url, "mon_dossier/image_test.jpg")
+
+with open(".gitignore", 'a', encoding = 'utf8') as ignore:
+    ignore.write(dossier)

@@ -46,7 +46,7 @@ The first step is to create a virtual environment in order to install the requir
 Get into the correct folder using terminal command. Then run the following command.
 
 ```sh
-python plusieurs_categorie.py 
+python P2_01_codesource.py 
 ```
 
 ## Dependencies

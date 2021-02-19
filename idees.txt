@@ -1,3 +1,0 @@
-créer une variable dynamique qui demande combien de categories l'utilisateur veut investiguer. Puis dans un deuxième temps
-Puis dans un deuxième temps lui demander de nommer ces catégories en vérifiant leur orthographe/existance.
-Enfin, on réalise le script pour toutes les catégories que l'utilisateur a demandé.

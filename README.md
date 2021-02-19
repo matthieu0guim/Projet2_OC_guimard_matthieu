@@ -1,10 +1,12 @@
-# Titre de projet
+# Web-scraping with python.
 
 ## Description
 This programme has been redacted for web scraping purpose. It is focused
-for the website book.toscrape.com. It will load the html code of a given category.
-Then, the programme will open and parse the webpage corresponding to each book in 
-the category. Once done it will load the following informations:
+on the website book.toscrape.com. It will load the html code of the home page in order to identify all the categories.
+Then, the programme will open the first one and parse it. It will create a list containing the title of all the books of 
+the category. It will then open each webpage corresponding to each book.
+Once done it will load the following informations:
+
 -product_page_url
 
 -universal_product_code
@@ -24,13 +26,14 @@ the category. Once done it will load the following informations:
 -review_rating
 
 -image_url
+
 All these informations will be loaded in a .csv file.
-The script will ask how many categories the user want to investigate.
-Then it will ask to name them. Once done, the script will load the previous informations in the same .csv file.
+The image file will also be downloaded and saved in the same folder.
+To visualize the data, it is possible to open the .csv file with Microsoft Excel.
 
 
 ## Execution
-### démarrer environnement virtuel 
+### how to implement the virtual environment:
 The first step is to create a virtual environment in order to install the required libraries.
 
 1- create your environment with the command "py -m venv env"
@@ -39,12 +42,14 @@ The first step is to create a virtual environment in order to install the requir
 
 3- install the needed libraries with the command "pip install -r requirements.txt"
 
-### éxécuter le script
+### script execution:
+Get into the correct folder using terminal command. Then run the following command.
+
 ```sh
-py plsr_pages.py 
+python plusieurs_categorie.py 
 ```
 
-## Dependances
+## Dependencies
 
 
 ## Licences

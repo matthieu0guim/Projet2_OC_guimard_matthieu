@@ -101,6 +101,7 @@ def listing(u, inventory):
 
 if __name__ == "__main__":
 
+
     home_url = "http://books.toscrape.com/index.html"
 
     response = requests.get(home_url)
@@ -113,28 +114,20 @@ if __name__ == "__main__":
 
     files_list = []
 
-    for nb, cat in enumerate(liste):
+    for nb, category in enumerate(liste):
+        category_folder = f"data/{category}"
+        if not os.path.exists(category_folder):
+            os.mkdir(category_folder)
 
-        try:
+        with open(f"data/{category}/page_produit_{category}.csv", 'w', encoding='utf8') as outf:
 
-            os.mkdir(cat)
-
-            ignore.write(cat + '\n')
-
-        except:
-
-            pass
-
-        with open(f"{cat}/page_produit_{cat}.csv", 'w', encoding='utf8') as outf:
-
-            files_list.append(f"{cat}/page_produit_{cat}.csv")
+            files_list.append(f"data/{category}/page_produit_{category}.csv")
 
             keys = maintenance['columns'].split(';')
 
             for n, header in enumerate(keys):
 
                 if n == len(keys) - 1:
-
                     outf.write(header + '\n')
 
                 else:
@@ -143,10 +136,10 @@ if __name__ == "__main__":
 
         with open('.gitignore', 'a', encoding = 'utf8') as ignore:
 
-            ignore.write(f"page_produit_{cat}.csv" + '\n')
+            ignore.write(f"page_produit_{category}.csv" + '\n')
 
         home_cat_url = f"http://books.toscrape.com/catalogue/category/books/" \
-                       f"{cat.lower().replace(' ', '-')}_{nb + 2}/index.html"
+                       f"{category.lower().replace(' ', '-')}_{nb + 2}/index.html"
 
         response = requests.get(home_cat_url)
 
@@ -160,11 +153,11 @@ if __name__ == "__main__":
 
             try:
 
-                os.mkdir(cat)
+                os.mkdir(category)
 
                 with open('.gitignore', 'a', encoding = 'utf8') as ignore:
 
-                    ignore.write(cat + '\n')
+                    ignore.write(category + '\n')
 
             except:
 
@@ -187,7 +180,7 @@ if __name__ == "__main__":
                 product_inspection = find_book_data(v, k)
 
                 urllib.request.urlretrieve(product_inspection['image_url'],
-                                           f"{cat}/"
+                                           f"{category}/"
                                            f"{k}.jpg")
 
                 write_data(product_inspection, files_list[nb])
@@ -207,7 +200,7 @@ if __name__ == "__main__":
                 product_inspection = find_book_data(v, k)
 
                 urllib.request.urlretrieve(product_inspection['image_url'],
-                                           f"{cat}/"
+                                           f"{category_folder}/"
                                            f"{k}.jpg")
 
                 write_data(product_inspection, files_list[nb])

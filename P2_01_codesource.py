@@ -33,7 +33,7 @@ def find_book_data(url, k):
     # in the html. It comes with ../../ at the beginning. One must delete these characters.
     dictionary["image_url"] = f"http://books.toscrape.com/{book_html_info.find('div', {'class': 'item active'}).img.get('src')[5:]}"
     dictionary['image'] = f"{k}.jpg"
-    dictionary["product_description"] = core.text.replace(';', ',')
+    dictionary["product_description"] = core.text.replace(';', ',').replace('\n','')
 
     # the variable info_table contains the universal_product_code, the price including and excluding taxes and the
     # number of book available.
@@ -88,6 +88,7 @@ if __name__ == "__main__":
     html_info = BeautifulSoup(response.text, 'html.parser')
     categories = html_info.find('ul', {'class': 'nav nav-list'}).find('ul').find_all('a')
     liste = [i.text.replace('\n', '').strip() for i in categories]
+    print(liste)
 
     files_list = []
     for nb, category in enumerate(liste):

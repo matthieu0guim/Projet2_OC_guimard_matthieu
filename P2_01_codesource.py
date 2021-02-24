@@ -90,6 +90,8 @@ if __name__ == "__main__":
     liste = [i.text.replace('\n', '').strip() for i in categories]
 
     files_list = []
+    if not os.path.exists(f"data"):
+        os.mkdir(f"data")
     for nb, category in enumerate(liste):
         category_folder = f"data/{category}"
         if not os.path.exists(category_folder):

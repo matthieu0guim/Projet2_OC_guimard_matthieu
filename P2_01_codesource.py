@@ -5,7 +5,7 @@ import os
 
 
 maintenance = {
-    'columns': 'product_page_url; universale_product_code; title; price_including_taxes; '
+    'columns': 'product_page_url; universal_product_code; title; price_including_taxes; '
                'price_excluding_taxes; '
                'number_available; product_description; category; review_rating; image_url; image',
     'csv separator': ';'
@@ -40,7 +40,7 @@ def find_book_data(url, k):
     info_table = book_html_info.find('table', {'class': 'table table-striped'})
     for index, tr in enumerate(info_table):
         if index == 1:
-            dictionary["universale_product_code"] = tr.find('td').text
+            dictionary["universal_product_code"] = tr.find('td').text
         elif index == 5:
             dictionary["price_excluding_taxes"] = tr.find('td').text[2:]
         elif index == 7:
@@ -88,7 +88,6 @@ if __name__ == "__main__":
     html_info = BeautifulSoup(response.text, 'html.parser')
     categories = html_info.find('ul', {'class': 'nav nav-list'}).find('ul').find_all('a')
     liste = [i.text.replace('\n', '').strip() for i in categories]
-    print(liste)
 
     files_list = []
     for nb, category in enumerate(liste):
@@ -96,16 +95,15 @@ if __name__ == "__main__":
         if not os.path.exists(category_folder):
             os.mkdir(category_folder)
 
-        with open(f"data/{category}/page_produit_{category}.csv", 'w', encoding='utf8') as outf:
-            files_list.append(f"data/{category}/page_produit_{category}.csv")
+        with open(f"data/{category}/product_page_{category}.csv", 'w', encoding='utf8') as outf:
+            files_list.append(f"data/{category}/product_page_{category}.csv")
             keys = maintenance['columns'].split(';')
             for n, header in enumerate(keys):
                 if n == len(keys) - 1:
                     outf.write(header + '\n')
                 else:
                     outf.write(header + maintenance['csv separator'])
-        with open('.gitignore', 'a', encoding = 'utf8') as ignore:
-            ignore.write(f"page_produit_{category}.csv" + '\n')
+
         home_cat_url = f"http://books.toscrape.com/catalogue/category/books/" \
                        f"{category.lower().replace(' ', '-')}_{nb + 2}/index.html"
         response = requests.get(home_cat_url)
